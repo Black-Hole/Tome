@@ -385,6 +385,7 @@ class GDMCHTTPProvider(
      * Parses NBT data (placeholder for actual NBT parsing).
      * Note: This would need to use fastnbt or similar NBT parsing library.
      */
+    @Suppress("UNUSED_PARAMETER")
     private inline fun <reified T> parseNbt(data: ByteArray): T {
         // TODO: Implement actual NBT parsing using a Kotlin NBT library
         // For now, we'll use JSON as a fallback since Chunks is serializable

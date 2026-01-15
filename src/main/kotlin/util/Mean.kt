@@ -14,11 +14,7 @@ fun Iterable<Float>.mean(): Float {
         count++
     }
     
-    return if (count > 0) {
-        sum / count
-    } else {
-        0.0f
-    }
+    return if (count > 0) sum / count else 0.0f
 }
 
 /**
@@ -35,11 +31,7 @@ fun Sequence<Float>.mean(): Float {
         count++
     }
     
-    return if (count > 0) {
-        sum / count
-    } else {
-        0.0f
-    }
+    return if (count > 0) sum / count else 0.0f
 }
 
 /**
@@ -56,11 +48,7 @@ fun Iterable<Double>.meanDouble(): Double {
         count++
     }
     
-    return if (count > 0) {
-        sum / count
-    } else {
-        0.0
-    }
+    return if (count > 0) sum / count else 0.0
 }
 
 /**
@@ -77,9 +65,5 @@ fun Sequence<Double>.meanDouble(): Double {
         count++
     }
     
-    return if (count > 0) {
-        sum / count
-    } else {
-        0.0
-    }
+    return if (count > 0) sum / count else 0.0
 }

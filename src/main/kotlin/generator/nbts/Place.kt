@@ -222,7 +222,7 @@ private fun parseNBTStructure(tag: Any): NBTStructure {
         PaletteBlock(name = BlockID.fromString(name), properties = properties)
     }
 
-    val blocksTag = tag.getList("blocks")
+    val blocksTag = compoundTag.getList("blocks")
     val blocks = (0 until blocksTag.size()).map { i ->
         val blockTag = blocksTag.getCompound(i)
         val state = blockTag.getInt("state")

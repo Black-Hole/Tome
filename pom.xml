@@ -122,8 +122,14 @@
         <!-- OpenAI Kotlin client -->
         <dependency>
             <groupId>com.aallam.openai</groupId>
-            <artifactId>openai-client</artifactId>
+            <artifactId>openai-client-jvm</artifactId>
             <version>3.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-okhttp-jvm</artifactId>
+            <version>${ktor.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- dotenv-kotlin for .env file loading -->

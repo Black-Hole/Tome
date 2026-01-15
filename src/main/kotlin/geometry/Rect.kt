@@ -151,10 +151,10 @@ data class Rect2D(
      * Checks if a point is on the edge of this rectangle.
      */
     fun onEdge(point: Point2D): Boolean {
-        return (point.x == origin.x || point.x == origin.x + size.x - 1) &&
-               (point.y >= origin.y && point.y < origin.y + size.y) ||
-               (point.y == origin.y || point.y == origin.y + size.y - 1) &&
-               (point.x >= origin.x && point.x < origin.x + size.x)
+        return ((point.x == origin.x || point.x == origin.x + size.x - 1) &&
+               (point.y >= origin.y && point.y < origin.y + size.y)) ||
+               ((point.y == origin.y || point.y == origin.y + size.y - 1) &&
+               (point.x >= origin.x && point.x < origin.x + size.x))
     }
 
     /**

@@ -12,7 +12,11 @@ import org.slf4j.LoggerFactory
 private const val CHUNK_SIZE = 16
 
 enum class BuildClaim {
-    None
+    None,
+    Nature,
+    Wall,
+    Gate,
+    Building
 }
 
 data class DistrictID(val id: String)
@@ -25,7 +29,7 @@ enum class DistrictType {
     Urban
 }
 
-data class BuildingData(val name: String)
+// BuildingData is now defined in generator.buildings package
 
 class World(
     val buildArea: Rect3D,
@@ -33,7 +37,7 @@ class World(
     val superDistricts: MutableMap<SuperDistrictID, SuperDistrict> = mutableMapOf(),
     val districtMap: MutableList<MutableList<DistrictID?>> = mutableListOf(),
     val superDistrictMap: MutableList<MutableList<SuperDistrictID?>> = mutableListOf(),
-    val buildings: MutableList<BuildingData> = mutableListOf(),
+    val buildings: MutableList<generator.buildings.BuildingData> = mutableListOf(),
     
     private val groundHeightMap: MutableList<MutableList<Int>>,
     private val groundBlockMap: MutableList<MutableList<Block>>,

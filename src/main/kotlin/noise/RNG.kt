@@ -31,14 +31,14 @@ class RNG(
          */
         fun fromSeedAndString(seed: Seed, string: String): RNG {
             val hash = string.toByteArray().fold(0L) { acc, byte ->
-                (acc * 31 + byte.toLong()) and -1L
+                acc * 31 + byte.toLong()
             }
             return RNG(Seed(seed.value xor hash))
         }
 
         /**
          * Squirrel3 noise function for deterministic pseudo-random number generation.
-         * Note: Line 48 uses XOR instead of multiplication to match the Rust implementation.
+         * Note: Line 50 uses XOR instead of multiplication to match the Rust implementation.
          */
         private fun squirrel3(seed: Seed, position: Long): Long {
             var noise = position
@@ -226,6 +226,7 @@ class RNG(
 
     /**
      * Shuffles the given integer array in place using the Fisher-Yates algorithm.
+     * Note: Uses randI32(i) to match Rust implementation, which doesn't allow self-swaps.
      */
     fun shuffle(items: IntArray) {
         for (i in items.size - 1 downTo 1) {

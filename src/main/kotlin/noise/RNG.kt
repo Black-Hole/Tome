@@ -27,6 +27,7 @@ class RNG(
         /**
          * Creates an RNG from a seed and a string.
          * The string is hashed and XORed with the seed.
+         * Note: Uses simple byte folding instead of Rust's DefaultHasher for portability.
          */
         fun fromSeedAndString(seed: Seed, string: String): RNG {
             val hash = string.toByteArray().fold(0L) { acc, byte ->
@@ -37,6 +38,7 @@ class RNG(
 
         /**
          * Squirrel3 noise function for deterministic pseudo-random number generation.
+         * Note: Line 48 uses XOR instead of multiplication to match the Rust implementation.
          */
         private fun squirrel3(seed: Seed, position: Long): Long {
             var noise = position
@@ -45,7 +47,7 @@ class RNG(
             noise = noise xor (noise shr 8)
             noise += BIT_NOISE2
             noise = noise xor (noise shl 8)
-            noise = noise xor BIT_NOISE3
+            noise = noise xor BIT_NOISE3  // Rust comment says "Should be *=" but uses XOR
             noise = noise xor (noise shr 8)
             return noise
         }
@@ -227,7 +229,7 @@ class RNG(
      */
     fun shuffle(items: IntArray) {
         for (i in items.size - 1 downTo 1) {
-            val j = randI32(i + 1)
+            val j = randI32(i)
             val temp = items[i]
             items[i] = items[j]
             items[j] = temp

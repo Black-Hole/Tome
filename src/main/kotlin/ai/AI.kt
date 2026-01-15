@@ -59,6 +59,9 @@ fun extractJson(response: String): String? {
 }
 
 suspend fun <T> tryAiJson(query: String, serializer: KSerializer<T>): T? {
+    // Note: Using a generic schema placeholder. Kotlin doesn't have a direct equivalent
+    // to Rust's schemars crate for generating JSON schemas from kotlinx.serialization.
+    // For production use, consider implementing schema generation or using JSON Schema libraries.
     val schema = """{"type": "object"}"""
     val response = getAiMessage(
         "You are a helpful assistant. Format your response in JSON according to the following schema: $schema. Do NOT include the schema in the response.",

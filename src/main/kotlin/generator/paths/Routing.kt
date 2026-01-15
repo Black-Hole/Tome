@@ -8,8 +8,8 @@ import kotlin.math.absoluteValue
 
 private fun mod4Point(point: Point3D, editor: Editor): Point3D {
     val point2d = Point2D(
-        x = point.x - point.x.mod(4),
-        y = point.z - point.z.mod(4)
+        x = point.x - ((point.x % 4) + 4) % 4,
+        y = point.z - ((point.z % 4) + 4) % 4
     )
     
     return editor.world().addHeight(point2d)

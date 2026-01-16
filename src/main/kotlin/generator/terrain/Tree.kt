@@ -249,6 +249,7 @@ private suspend fun generateMediumBirch(
             10 -> {
                 branches.add(Triple(x0 - 2, branchHeight, z0 - 2))
                 editor.placeBlock(wood, Point3D(x0 - 2, branchHeight, z0 - 2))
+                editor.placeBlock(wood, Point3D(x0 - 2, branchHeight - 1, z0 - 2))
                 editor.placeBlock(wood, Point3D(x0 - 1, branchHeight - 2, z0 - 1))
             }
             11 -> {

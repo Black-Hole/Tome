@@ -122,7 +122,7 @@ private suspend fun generateSmallBirch(
         if (y >= height) {
             editor.placeBlockChance(leaf, Point3D(x0, y, z0), rng, leafChance)
         } else {
-            editor.placeBlockChance(wood, Point3D(x0, y, z0), rng, leafChance)
+            editor.placeBlock(wood, Point3D(x0, y, z0))
         }
         val mid = ((height - y0) / 2 + y0) - 1
         if (y == mid || y == height + 1) {

@@ -60,7 +60,7 @@ data class SuperDistrict(
 
     fun getSubtypes(districts: Map<DistrictID, District>): Map<DistrictType, Int> {
         val subtypes = mutableMapOf<DistrictType, Int>()
-        for (districtId in districts()) {
+        for (districtId in this.districts) {
             val district = districts[districtId]
                 ?: error("District with id ${districtId.value} not found")
             val districtType = district.data.districtType

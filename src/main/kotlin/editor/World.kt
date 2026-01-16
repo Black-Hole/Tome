@@ -248,7 +248,7 @@ class World(
 
     fun getDistrictType(point: Point2D): DistrictType? {
         return getSuperDistrictAt(point)?.let { districtId ->
-            superDistricts[districtId]?.districtType
+            superDistricts[districtId]?.data?.districtType
         }
     }
 }

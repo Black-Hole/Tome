@@ -196,17 +196,17 @@ suspend fun buildWallPalisade(
 
     materialPlacer.placeBlocks(
         editor,
-        mainPoints.asSequence(),
+        mainPoints.toList(),
         materialId,
-        BlockForm.Log,
+        BlockForm.LOG,
         null,
         null
     )
     materialPlacer.placeBlocks(
         editor,
-        topPoints.asSequence(),
+        topPoints.toList(),
         materialId,
-        BlockForm.Fence,
+        BlockForm.FENCE,
         null,
         null
     )
@@ -247,7 +247,7 @@ suspend fun buildWallStandard(
     val walkwayPoints = mutableListOf<Point2D>()
     val walkwayHeights = mutableMapOf<Point2D, Int>()
 
-    var previousDir = Cardinal.North
+    var previousDir = Cardinal.NORTH
 
     for ((i, triple) in enhancedWallPoints.withIndex()) {
         val (point, directions, wallType) = triple
@@ -260,7 +260,7 @@ suspend fun buildWallStandard(
 
             for (y in editor.world().getHeightAt(point.dropY())..point.y) {
                 val newPoint = Point3D(point.x, y, point.z)
-                materialPlacer.placeBlock(editor, newPoint, materialId, BlockForm.Block, null, null)
+                materialPlacer.placeBlock(editor, newPoint, materialId, BlockForm.BLOCK, null, null)
             }
 
             if (directions.isNotEmpty()) {
@@ -271,7 +271,7 @@ suspend fun buildWallStandard(
                 editor,
                 Point3D(point.x, point.y + 1, point.z),
                 materialId,
-                BlockForm.Stairs,
+                BlockForm.STAIRS,
                 state,
                 null
             )
@@ -345,7 +345,7 @@ suspend fun buildWallStandardWithInner(
     val walkwayHeights = mutableMapOf<Point2D, Int>()
     val innerWallPoints = mutableSetOf<Point3D>()
 
-    var previousDir = Cardinal.North
+    var previousDir = Cardinal.NORTH
 
     for ((i, triple) in enhancedWallPoints.withIndex()) {
         val (point, directions, wallType) = triple
@@ -369,7 +369,7 @@ suspend fun buildWallStandardWithInner(
 
             for (y in editor.world().getHeightAt(point.dropY())..point.y) {
                 val newPoint = Point3D(point.x, y, point.z)
-                materialPlacer.placeBlock(editor, newPoint, materialId, BlockForm.Block, null, null)
+                materialPlacer.placeBlock(editor, newPoint, materialId, BlockForm.BLOCK, null, null)
             }
 
             if (directions.isNotEmpty()) {
@@ -380,7 +380,7 @@ suspend fun buildWallStandardWithInner(
                 editor,
                 Point3D(point.x, point.y + 1, point.z),
                 materialId,
-                BlockForm.Stairs,
+                BlockForm.STAIRS,
                 state,
                 null
             )
@@ -416,7 +416,7 @@ suspend fun buildWallStandardWithInner(
                                     editor,
                                     newPt.addY(y),
                                     materialId,
-                                    BlockForm.Block,
+                                    BlockForm.BLOCK,
                                     null,
                                     null
                                 )
@@ -459,7 +459,7 @@ suspend fun buildWallStandardWithInner(
                                 editor,
                                 newPt.addY(y),
                                 materialId,
-                                BlockForm.Block,
+                                BlockForm.BLOCK,
                                 null,
                                 null
                             )
@@ -480,7 +480,7 @@ suspend fun buildWallStandardWithInner(
                     editor,
                     point.dropY().addY(y),
                     materialId,
-                    BlockForm.Block,
+                    BlockForm.BLOCK,
                     null,
                     null
                 )
@@ -531,7 +531,7 @@ fun addWallPointsHeight(wallPoints: List<Point2D>, editor: Editor): List<Point3D
             currentHeight = pointHeight
             targetHeight = currentHeight
         } else if (currentHeight != targetHeight && i > 1 && i < wallPoints.size - 2) {
-            if (isStraightPoint2d(wallPoints[i - 2], wallPoints[i + 2], 4)) {
+            if (isStraightPoint2D(wallPoints[i - 2], wallPoints[i + 2], 4)) {
                 when {
                     currentHeight < targetHeight -> currentHeight++
                     currentHeight > targetHeight -> currentHeight--
@@ -603,9 +603,9 @@ suspend fun fillWater(
 
     materialPlacer.placeBlocks(
         editor,
-        waterPoints.asSequence(),
+        waterPoints.toList(),
         materialId,
-        BlockForm.Block,
+        BlockForm.BLOCK,
         null,
         null
     )
@@ -630,7 +630,7 @@ suspend fun flattenWalkway(
                     editor,
                     Point3D(point.x, height.roundToInt(), point.y),
                     materialId,
-                    BlockForm.Slab,
+                    BlockForm.SLAB,
                     null,
                     null
                 )
@@ -642,7 +642,7 @@ suspend fun flattenWalkway(
                     editor,
                     Point3D(point.x, height.roundToInt(), point.y),
                     materialId,
-                    BlockForm.Slab,
+                    BlockForm.SLAB,
                     state,
                     null
                 )
@@ -653,7 +653,7 @@ suspend fun flattenWalkway(
                     editor,
                     Point3D(point.x, height.roundToInt() - 1, point.y),
                     materialId,
-                    BlockForm.Slab,
+                    BlockForm.SLAB,
                     null,
                     null
                 )
@@ -663,8 +663,9 @@ suspend fun flattenWalkway(
     }
 
     for ((point, height) in updatedWalkwayHeights.toMap()) {
-        for (direction in CARDINALS_2D) {
-            val neighbour = point + Point2D.from(direction)
+        val cardinals2d = Point2D.CARDINALS_2D
+        for (direction in cardinals2d) {
+            val neighbour = point + direction
             if (!updatedWalkwayHeights.containsKey(neighbour)) {
                 continue
             } else if (height % 1.0 == 0.0) {
@@ -676,7 +677,7 @@ suspend fun flattenWalkway(
                         editor,
                         Point3D(point.x, height.roundToInt(), point.y),
                         materialId,
-                        BlockForm.Stairs,
+                        BlockForm.STAIRS,
                         state,
                         null
                     )
@@ -689,7 +690,7 @@ suspend fun flattenWalkway(
                     editor,
                     Point3D(point.x, height.roundToInt() + 1, point.y),
                     materialId,
-                    BlockForm.Stairs,
+                    BlockForm.STAIRS,
                     state,
                     null
                 )
@@ -760,7 +761,7 @@ suspend fun buildWallTowers(
                                 editor,
                                 neighbour.addY(height),
                                 materialId,
-                                BlockForm.Block,
+                                BlockForm.BLOCK,
                                 null,
                                 null
                             )
@@ -774,7 +775,8 @@ suspend fun buildWallTowers(
                     null,
                     tower,
                     point.addY(pointHeight + 6),
-                    Cardinal.North,
+                    Cardinal.NORTH,
+                    null,
                     null,
                     null,
                     false,

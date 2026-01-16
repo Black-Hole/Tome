@@ -45,7 +45,7 @@ suspend fun buildWallGate(
         ?.toSet()
         ?: emptySet()
 
-    val air = Block(BlockID.Air, null, null)
+    val air = Block(BlockID.AIR, null, null)
 
     for ((i, point) in wallPoints.withIndex()) {
         if (gatePossible == 0) {
@@ -91,6 +91,7 @@ suspend fun buildWallGate(
                         palisadeGate,
                         middlePoint,
                         direction,
+                        null,
                         null,
                         null,
                         false,
@@ -141,6 +142,7 @@ suspend fun buildWallGate(
                         direction,
                         null,
                         null,
+                        null,
                         mirrorX,
                         false
                     )
@@ -185,6 +187,7 @@ suspend fun buildWallGate(
                             wideGate,
                             middlePoint.addY(height),
                             direction.rotateRight(),
+                            null,
                             null,
                             null,
                             mirrorX,

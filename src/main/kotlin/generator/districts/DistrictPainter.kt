@@ -4,7 +4,6 @@ import editor.Editor
 import generator.BuildClaim
 import generator.terrain.Forest
 import generator.terrain.generateTree
-import geometry.CARDINALS_2D
 import geometry.Point2D
 import geometry.Point3D
 import geometry.cardinalToStr
@@ -76,9 +75,10 @@ suspend fun replaceGroundSmooth(
         }
 
         val yInDir = mutableMapOf<Point2D, Int>()
-        var selectedBlock = Block(BlockID.Unknown, null, null)
+        var selectedBlock = Block(BlockID.UNKNOWN, null, null)
 
-        for (direction in CARDINALS_2D) {
+        val cardinals2d = Point2D.CARDINALS_2D
+        for (direction in cardinals2d) {
             val neighbor = point + direction
             val oppositeNeighbour = point - direction
 
@@ -107,7 +107,7 @@ suspend fun replaceGroundSmooth(
             selectedBlock = blockList[rng.chooseWeighted(blockDict[2]!!)].copy()
         }
 
-        if (selectedBlock.id == BlockID.Unknown) {
+        if (selectedBlock.id == BlockID.UNKNOWN) {
             selectedBlock = blockList[rng.chooseWeighted(blockDict[0]!!)].copy()
         }
 

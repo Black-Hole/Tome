@@ -1,8 +1,8 @@
 package generator.districts
 
 import editor.Editor
-import geometry.CARDINALS_2D
 import geometry.Point2D
+import geometry.Point3D
 import minecraft.Biome
 import minecraft.BlockID
 import kotlin.math.abs
@@ -25,9 +25,14 @@ data class DistrictAnalysis(
 }
 
 suspend fun <TID> analyzeDistrict(area: DistrictData<TID>, editor: Editor): DistrictAnalysis {
-    val average = area.average()
+    val average = if (area.points.isEmpty()) {
+        Point3D(0, 0, 0)
+    } else {
+        area.sum / area.points.size
+    }
     val averageHeight = average.y
     val numberOfPoints = area.points.size.toFloat()
+    val cardinals2d = Point2D.CARDINALS_2D
 
     var waterBlocks = 0
     var leafBlocks = 0
@@ -46,7 +51,7 @@ suspend fun <TID> analyzeDistrict(area: DistrictData<TID>, editor: Editor): Dist
         rootMeanSquareHeight += (point.y - averageHeight).toFloat().pow(2)
 
         val height = editor.world().getHeightAt(point.dropY())
-        val averageNeighbourHeight = CARDINALS_2D.sumOf { cardinal ->
+        val averageNeighbourHeight = cardinals2d.sumOf { cardinal ->
             val neighbour = point.dropY() + cardinal
             if (editor.world().isInBounds2d(neighbour)) {
                 abs(height - editor.world().getHeightAt(neighbour))

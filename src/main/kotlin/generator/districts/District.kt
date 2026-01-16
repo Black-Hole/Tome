@@ -76,7 +76,7 @@ data class District(
                 while (trials < SPAWN_DISTRICTS_RETRIES) {
                     trials++
 
-                    val trialPoint = world.addHeight(rng.randPoint2D(rect.size) + rect.origin)
+                    val trialPoint = world.addHeight(rng.randPoint2d(rect.size) + rect.origin)
 
                     if (points.all { p ->
                             p.distanceSquared(trialPoint) > SPAWN_DISTRICTS_MIN_DISTANCE * SPAWN_DISTRICTS_MIN_DISTANCE

@@ -1,6 +1,6 @@
 package generator.buildings
 
-import editor.BuildClaim
+import generator.BuildClaim
 import editor.Editor
 import generator.materials.PaletteId
 import generator.style.Style

@@ -191,4 +191,9 @@ data class Rect2D(
             }
         }
     }
+    
+    /**
+     * Iterates over all points in this rectangle (alias for asSequence).
+     */
+    fun iter(): Sequence<Point2D> = asSequence()
 }

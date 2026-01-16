@@ -27,6 +27,16 @@ data class Point2D(
 
         val CARDINALS = arrayOf(NORTH, SOUTH, EAST, WEST)
         val ALL_8 = arrayOf(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+        
+        // Alternative names for some constants
+        val X_PLUS_2D = EAST
+        val Y_PLUS_2D = SOUTH
+        val CARDINALS_2D = CARDINALS
+        
+        /**
+         * Converts a Cardinal to a Point2D.
+         */
+        fun from(cardinal: Cardinal): Point2D = cardinal.toPoint2D()
     }
 
     /**
@@ -76,4 +86,9 @@ data class Point2D(
      * Negates this point.
      */
     operator fun unaryMinus(): Point2D = Point2D(-x, -y)
+    
+    /**
+     * Converts this 2D point to a 3D point with the specified Y coordinate.
+     */
+    fun addY(y: Int): Point3D = Point3D(x, y, this.y)
 }

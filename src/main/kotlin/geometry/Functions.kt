@@ -102,3 +102,10 @@ fun getSurroundingSet(points: Set<Point2D>, distance: Int): Set<Point2D> {
         surrounding + getSurroundingSet(surrounding, distance - 1)
     }
 }
+
+/**
+ * Converts a Point2D direction to its corresponding Cardinal string representation.
+ */
+fun cardinalToStr(direction: Point2D): String? {
+    return Cardinal.fromPoint2D(direction)?.toString()
+}

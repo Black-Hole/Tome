@@ -1,5 +1,11 @@
 package editor
 
+import generator.districts.DistrictID
+import generator.districts.SuperDistrictID
+import generator.districts.District
+import generator.districts.SuperDistrict
+import generator.districts.DistrictType
+import generator.BuildClaim
 import geometry.Point2D
 import geometry.Point3D
 import geometry.Rect2D
@@ -10,26 +16,6 @@ import minecraft.*
 import org.slf4j.LoggerFactory
 
 private const val CHUNK_SIZE = 16
-
-enum class BuildClaim {
-    None,
-    Nature,
-    Wall,
-    Gate,
-    Building
-}
-
-data class DistrictID(val id: String)
-data class SuperDistrictID(val id: String)
-
-data class District(val id: DistrictID)
-data class SuperDistrict(val id: SuperDistrictID, val districtType: DistrictType)
-
-enum class DistrictType {
-    Urban
-}
-
-// BuildingData is now defined in generator.buildings package
 
 class World(
     val buildArea: Rect3D,
